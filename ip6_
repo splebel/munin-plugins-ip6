@@ -48,23 +48,21 @@ if [ "$1" = "suggest" ]; then
 fi
 
 if [ "$1" = "config" ]; then
-
-        echo "graph_order out in"
-        echo "graph_title $IP traffic"
-        echo 'graph_args --base 1000'
-        echo 'graph_vlabel bits per ${graph_period}'
+	echo "graph_order out in"
+	echo "graph_title $IP traffic"
+	echo 'graph_args --base 1000'
+	echo 'graph_vlabel bits per ${graph_period}'
 	echo 'graph_category network'
-        echo 'out.label sent'
-        echo 'out.type DERIVE'
-        echo 'out.min 0'
-        echo 'out.cdef out,8,*'
-        echo 'in.label received'
-        echo 'in.type DERIVE'
-        echo 'in.min 0'
-        echo 'in.cdef in,8,*' 
-        exit 0
+	echo 'out.label sent'
+	echo 'out.type DERIVE'
+	echo 'out.min 0'
+	echo 'out.cdef out,8,*'
+	echo 'in.label received'
+	echo 'in.type DERIVE'
+	echo 'in.min 0'
+	echo 'in.cdef in,8,*' 
+	exit 0
 fi;
 
 ip6tables -L INPUT -v -n -x | grep -m1 $IP | awk "{ print \"in.value \" \$2 }"
 ip6tables -L OUTPUT -v -n -x | grep -m1 $IP | awk "{ print \"out.value \" \$2 }"
-
